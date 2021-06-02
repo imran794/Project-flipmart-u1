@@ -49,7 +49,14 @@ active
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ url('admin/edit') }}/{{ $brand->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
-                                <a href="{{ url('admin/brand/soft') }}/{{ $brand->id }}"  type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
+                                @if (Auth::user()->role_id == 4)
+                                 @else
+                                   @if (Auth::user()->role_id == 3)
+                                   @else
+                              
+                                 <a href="{{ url('admin/brand/soft') }}/{{ $brand->id }}"  type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
+                                @endif
+                                  @endif
                                 @if ($brand->status == 1)
                                  <a href="{{ url('admin/inactive') }}/{{ $brand->id }}"  type="button" class="btn btn-danger btn-sm" title="Inactive"><i class="fa fa-arrow-down"></i></a>
                                  @else  
@@ -66,6 +73,9 @@ active
                </div>
            </div>
            <br>
+           @if (Auth::user()->role_id != 3)
+             
+          
            <div class="card">
             <div class="card-body">Trash Data</div>
             <div class="card-header">
@@ -109,6 +119,8 @@ active
                </div>
             </div>
         </div>
+         @else
+           @endif
         </div>
         <div class="col-md-4">
          <div class="card">

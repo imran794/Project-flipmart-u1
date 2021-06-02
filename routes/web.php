@@ -75,6 +75,10 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
    Route::get('subcategory/edit/{id}',[CategoryController::class,'subcategoryedit']);
    Route::post('subcategory/edit/post',[CategoryController::class,'subcategoryeditpost'])->name('subcategory.edit.post');
 
+   // add sub sub sub category
+
+   Route::get('add/subsubcategory',[CategoryController::class,'subindex'])->name('add.subsubcategory');
+
 
 
 });

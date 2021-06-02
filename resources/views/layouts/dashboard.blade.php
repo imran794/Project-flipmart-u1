@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -69,6 +67,9 @@
             <span class="menu-item-label"> Add Brand</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        @if (Auth::user()->role_id == 3)
+          @else
+   
           <a href="#" class="sl-menu-link @yield('categories')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
@@ -79,7 +80,9 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('add.category') }}" class="nav-link @yield('Add Category')">Add Category</a></li>
           <li class="nav-item"><a href="{{ route('add.subcategory') }}" class="nav-link @yield('Add Sub Category')">Add Sub Category</a></li>
+          <li class="nav-item"><a href="{{ route('add.subsubcategory') }}" class="nav-link @yield('Add Sub Sub Category')">Add Sub Sub Category</a></li>
         </ul>
+             @endif
         <a href="widgets.html" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
@@ -118,12 +121,13 @@
         <nav class="nav">
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-              <span class="logged-name">Jane<span class="hidden-md-down"> Doe</span></span>
-              <img src="../img/img3.jpg" class="wd-32 rounded-circle" alt="">
+              <span class="logged-name">{{ Auth::user()->name }}<span class="hidden-md-down"></span></span>
+              <img src="{{ asset(Auth::user()->image) }}" class="wd-32 rounded-circle" alt="">
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
                 <li><a href="{{ route('all.user') }}"><i class="icon ion-ios-person-outline"></i>All User</a></li>
+                <li><a href="{{ route('admin.dashboard') }}"><i class="icon ion-ios-person-outline"></i>Profile</a></li>
                    <li>
                     <a href="{{ route('logout') }}"   onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"><i class="icon ion-power"></i> Sign Out</a>

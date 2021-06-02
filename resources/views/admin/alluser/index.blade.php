@@ -49,8 +49,13 @@
                             <td>
                               @if ($user->role_id == 1)
                                 <span class="badge badge-pill badge-success">Admin</span>
-                                @else
-                                <span class="badge badge-pill badge-info">User</span>
+                                 @elseif ($user->role_id == 2)
+                                  <span class="badge badge-pill badge-info">User</span>
+                                    @elseif ($user->role_id == 3)
+                                  <span class="badge badge-pill badge-primary">Author</span>
+                                    @elseif ($user->role_id == 4)
+                                  <span class="badge badge-pill badge-danger">Moderate</span>
+                                
                               @endif
                             </td>
                             <td>
