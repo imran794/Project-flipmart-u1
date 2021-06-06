@@ -12,10 +12,8 @@ class SubCategory extends Model
     use SoftDeletes;
     protected $guarded = [];
 
-    public function get_relation_category()
-    {
-    	return $this->belongsTo('App\models\Category','category_id');
-    	
 
+    public function category(){
+      return  $this->belongsTo(Category::class);
     }
 }

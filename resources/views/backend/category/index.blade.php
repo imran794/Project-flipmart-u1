@@ -12,7 +12,7 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('admin.dashboard') }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Add Category</li>
     </ol>
   </nav>
@@ -51,7 +51,7 @@
                           </td>
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ url('admin/category/edit') }}/{{ $category->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ url('admin/category/edit') }}/{{ $category->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                 <a href="{{ url('admin/category/soft') }}/{{ $category->id }}"  type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
                                 @if ($category->status == 1)
                                  <a href="{{ url('admin/category/inactive') }}/{{ $category->id }}"  type="button" class="btn btn-danger btn-sm" title="Inactive"><i class="fa fa-arrow-down"></i></a>

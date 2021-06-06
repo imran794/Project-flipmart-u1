@@ -40,7 +40,7 @@
 
                         <div class="form-group">
                             <label class="info-title" for="exampleInputEmail2">Image <span>*</span></label>
-                            <input type="file" class="form-control unicase-form-control text-input" id="exampleInputEmail2" name="image">
+                            <input type="file" class="dropify form-control unicase-form-control text-input" id="exampleInputEmail2" name="image">
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

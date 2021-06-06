@@ -38,7 +38,7 @@
                   @csrf
                        <div class="form-group">
                       <label for="exampleInputPassword1">Image</label>
-                      <input type="file" name="image" class="form-control" id="exampleInputPassword1">
+                      <input type="file" name="image" class="dropify form-control" id="exampleInputPassword1">
                       @error('image')
                       <span class="text-danger">{{ $message }}</span>
                      @enderror

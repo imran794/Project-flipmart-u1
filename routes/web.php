@@ -6,6 +6,7 @@ Use App\Http\Controllers\Admin\IndexController;
 Use App\Http\Controllers\Admin\BrandController;
 Use App\Http\Controllers\Admin\CategoryController;
 Use App\Http\Controllers\Admin\SubcategoryController;
+Use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,6 +79,15 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
    // add sub sub sub category
 
    Route::get('add/subsubcategory',[CategoryController::class,'subindex'])->name('add.subsubcategory');
+   Route::post('subsubcategory/post',[CategoryController::class,'subsubcategorypost'])->name('subsubcategory.post');
+   Route::get('subcategory/ajax/{category_id}',[CategoryController::class,'subcategoryajax']);
+   Route::get('subsubcategory/soft/{id}',[CategoryController::class,'subsubcategorysoft']);
+   Route::get('subsubcategory/restore/{id}',[CategoryController::class,'subsubcategoryrestore']);
+   Route::get('subsubcategory/delete/{id}',[CategoryController::class,'subsubcategorydelete']);
+
+   // product
+
+   Route::get('add/product',[ProductController::class,'index'])->name('add.product');
 
 
 

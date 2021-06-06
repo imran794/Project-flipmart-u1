@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('admin.dashboard') }}">Home</a></li>
+     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
       <li class="breadcrumb-item"><a href="{{ route('add.subcategory') }}">Sub Category</a></li>
       <li class="breadcrumb-item active" aria-current="page">Edit Sub category</li>
     </ol>
@@ -24,7 +24,7 @@
                
                       <div class="form-group">
                       <label for="exampleInputEmail1">Category Name</label>
-                      <select name="category_id" class="form-control">
+                      <select name="category_id" class="js-example-basic-single form-control">
                         <option value="">-Select One-</option>
                         @foreach ($categories as $category)
                           <option value="{{ $category->id }}" {{ $category->id ==  $edit_data->category_id ? 'selected': '' }}>{{ ucwords($category->category_name) }}</option>

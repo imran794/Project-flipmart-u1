@@ -12,7 +12,7 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('admin.dashboard') }}">Home</a></li>
+       <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Add Sub Category</li>
     </ol>
   </nav>
@@ -42,7 +42,7 @@
                           @foreach ($subcategories as $subcategory)
                           <tr>
                             <td>{{ $subcategory->subcategory_name }}</td>
-                            <td>{{ $subcategory->get_relation_category->category_name }}</td>
+                            <td>{{ $subcategory->category->category_name }}</td>
                             <td>
                               @if ($subcategory->status == 1)
                                <span class="badge badge-pill badge-success">Active</span>
@@ -52,7 +52,7 @@
                           </td>
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ url('admin/subcategory/edit') }}/{{ $subcategory->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ url('admin/subcategory/edit') }}/{{ $subcategory->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                 <a href="{{ url('admin/subcategory/soft') }}/{{ $subcategory->id }}"  type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
                                 @if ($subcategory->status == 1)
                                  <a href="{{ url('admin/subcategory/inactive') }}/{{ $subcategory->id }}"  type="button" class="btn btn-danger btn-sm" title="Inactive"><i class="fa fa-arrow-down"></i></a>
@@ -120,7 +120,7 @@
                   @csrf
                   <div class="form-group">
                       <label for="exampleInputEmail1">Category Name</label>
-                      <select name="category_id" class="form-control">
+                      <select name="category_id" class="js-example-basic-single form-control">
                         <option value="">-Select One-</option>
                         @foreach ($categories as $category)
                           <option value="{{ $category->id }}">{{ ucwords($category->category_name) }}</option>

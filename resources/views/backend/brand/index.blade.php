@@ -7,7 +7,7 @@ active
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('admin.dashboard') }}">Home</a></li>
+      <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
       <li class="breadcrumb-item active" aria-current="page">Brand</li>
     </ol>
   </nav>
@@ -138,7 +138,7 @@ active
                     </div>
                        <div class="form-group">
                       <label for="exampleInputPassword1">Brnad Image</label>
-                      <input type="file" name="brand_image" class="form-control" id="exampleInputPassword1" placeholder="Brand Image</th">
+                      <input type="file" name="brand_image" class="dropify form-control" id="exampleInputPassword1" placeholder="Brand Image</th">
                       @error('brand_image')
                       <span class="text-danger">{{ $message }}</span>
                      @enderror

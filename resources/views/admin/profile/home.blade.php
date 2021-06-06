@@ -31,6 +31,8 @@
 
         </div>
         <div class="col-md-8">
+
+        
          <div class="card">
                <h3 class="text-center"> <span class="text-dange">Hi..!</span> <strong class="text-warning">{{ Auth::user()->name }}</strong> Update Your profile</h3>
              <div class="card-body">

@@ -3,7 +3,7 @@
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ url('admin.dashboard') }}">Home</a></li>
+       <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
       <li class="breadcrumb-item"><a href="{{ route('brand') }}">Brand</a></li>
       <li class="breadcrumb-item active" aria-current="page">Edit Brand</li>
     </ol>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\models\Category;
 use App\models\SubCategory;
+use App\models\Subsubcategory;
 use Carbon\Carbon;
 use Str;
 
@@ -22,11 +23,11 @@ class CategoryController extends Controller
     public function categorystore(Request $request)
     {
 
-    	// $request->validate([
-    	// 	'category_icon'		=> 'required,',
-    	// 	'category_name'		=> 'required|unique:categories,category_name'
+    	$request->validate([
+    		'category_icon'		=> 'required',
+    		'category_name'		=> 'required|unique:categories,category_name'
  
-    	// ]);
+    	]);
 
 
        $slug = Str::slug( $request->category_name.'-'.carbon::now()->timestamp);
@@ -240,4 +241,77 @@ class CategoryController extends Controller
         return Redirect()->route('add.subcategory')->with($notification);
 
     }
+
+    // subsub category
+
+    public function subindex()
+    {
+        return view('backend.subsubcategory.index',[ 
+            'subsubcategories'  => Subsubcategory::latest()->get(),
+            'categories'        => Category::orderBy('category_name','asc')->get(),
+            'trashed'           => Subsubcategory::onlyTrashed()->get()
+        ]);
+    }
+
+    public function subsubcategorypost(Request $request)
+    {
+        $request->validate([
+            'category_id'               => 'required',
+            'subcategory_id'            => 'required',
+            'subsubcategory_name'       => 'required',
+        ]);
+
+        $slug = Str::slug($request->subsubcategory_name.'-'.carbon::now()->timestamp);
+        Subsubcategory::insert([
+            'category_id'               => $request->category_id,
+            'subcategory_id'            => $request->subcategory_id,
+            'subsubcategory_name'       => $request->subsubcategory_name,
+            'subsubcategory_slug'       => $slug,
+            'created_at'                => Carbon::now()
+        ]);
+
+        $notification=array(
+            'message'=>'Sub Sub Category insert Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('add.subsubcategory')->with($notification);
+    }
+
+
+    public function subcategoryajax($category_id)
+    {
+        $subcat = SubCategory::where('category_id',$category_id)->orderBy('subcategory_name','asc')->get();
+        return json_encode($subcat);
+    }
+
+    public function subsubcategorysoft($id)
+    {
+        Subsubcategory::findOrFail($id)->delete();
+         $notification=array(
+            'message'=>'Sub Sub Category Soft Delete Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('add.subsubcategory')->with($notification);
+    }
+
+    public function subsubcategoryrestore($id)
+    {
+        Subsubcategory::withTrashed()->where('id','=',$id)->restore();
+        $notification=array(
+            'message'=>'Sub Sub Category Restore Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('add.subsubcategory')->with($notification);
+    }
+
+      public function subsubcategorydelete($id)
+    {
+        Subsubcategory::withTrashed()->where('id','=',$id)->forceDelete();
+        $notification=array(
+            'message'=>'Sub Sub Category Delete Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('add.subsubcategory')->with($notification);
+    }
+      
 }

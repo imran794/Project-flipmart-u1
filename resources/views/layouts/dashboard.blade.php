@@ -3,6 +3,7 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Twitter -->
@@ -33,8 +34,11 @@
     <!-- vendor css -->
     <link href="{{ asset('dashboard_assets') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="{{ asset('dashboard_assets') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+      <link href="{{ asset('dashboard_assets') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="{{ asset('dashboard_assets') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+     <link href="{{ asset('dashboard_assets') }}/lib/select2/css/select2.min.css" rel="stylesheet">
       <link rel="stylesheet" href="{{ asset('backend') }}/lib/toastr/toastr.css">
+      <link rel="stylesheet" href="{{ asset('backend') }}/css/dropify.min.css">
 
 
     <!-- Starlight CSS -->
@@ -83,6 +87,19 @@
           <li class="nav-item"><a href="{{ route('add.subsubcategory') }}" class="nav-link @yield('Add Sub Sub Category')">Add Sub Sub Category</a></li>
         </ul>
              @endif
+
+          <a href="#" class="sl-menu-link @yield('Products')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
+            <span class="menu-item-label">Products</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('add.product') }}" class="nav-link @yield('Add Product')">Add Product</a></li>
+          <li class="nav-item"><a href="{{ route('add.subcategory') }}" class="nav-link @yield('Add Sub Category')">Add Sub Category</a></li>
+          <li class="nav-item"><a href="{{ route('add.subsubcategory') }}" class="nav-link @yield('Add Sub Sub Category')">Add Sub Sub Category</a></li>
+        </ul>
         <a href="widgets.html" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
@@ -326,14 +343,31 @@
     <script src="{{ asset('dashboard_assets') }}/lib/jquery/jquery.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/bootstrap/bootstrap.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/lib/datatables/jquery.dataTables.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-
+     <script src="{{ asset('dashboard_assets') }}/lib/select2/js/select2.min.js"></script>
     <script src="{{ asset('dashboard_assets') }}/js/starlight.js"></script>
     <script type="text/javascript" src="{{ asset('backend') }}/lib/toastr/toastr.min.js"></script>
+     <script type="text/javascript" src="{{ asset('backend') }}/js/dropify.min.js"></script>
 
     <script>
+       $.ajaxSetup({
+        headers:{
+            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+      $(document).ready(function() {
+          $('.js-example-basic-single').select2();
+      });
+
+     
+
+       $('.dropify').dropify();
       @if(Session::has('message'))
-        var type ="{{Session::get('alert-type','info')}}"
+        var type ="{{Session::get('alert-type','info')}}";
         switch(type){
             case 'info':
                 toastr.info(" {{Session::get('message')}} ");
@@ -352,6 +386,31 @@
                 break;
         }
     @endif
+    </script>
+
+    <script>
+      $(function(){
+        'use strict';
+
+        $('#datatable1').DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+          }
+        });
+
+        $('#datatable2').DataTable({
+          bLengthChange: false,
+          searching: false,
+          responsive: true
+        });
+
+        // Select2
+        $('.dataTables_length select').select2({ minimumResultsForSearch: Infinity });
+
+      });
     </script>
 
   </body>
