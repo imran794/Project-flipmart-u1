@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('product_code');
             $table->string('product_qty');
             $table->string('product_tag');
-            $table->string('product_size');
+            $table->string('product_size')->nullable();
             $table->string('thumbnail_image');
             $table->text('shot_des');
             $table->text('long_des');

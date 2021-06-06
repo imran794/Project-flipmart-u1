@@ -1,176 +1,218 @@
 @extends('layouts.dashboard')
-
-@section('categories')
- active show-sub 
- @endsection
-
- @section('Add Category')
- active  
- @endsection
-
-
+@section('Products')
+active show-sub
+@endsection
+@section('Add Product')
+active
+@endsection
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Add Category</li>
-    </ol>
-  </nav>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Add Product</li>
+	</ol>
+</nav>
 @endsection
-
 @section('content')
-
 <div class="sl-pagebody">
-        <div class="sl-page-title">
-          <h5>Form Layouts</h5>
-          <p>Forms are used to collect user information with different element types of input, select, checkboxes, radios and more.</p>
-        </div><!-- sl-page-title -->
-
-        <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">Top Label Layout</h6>
-          <p class="mg-b-20 mg-sm-b-30">A form with a label on top of each form control.</p>
-
-          <div class="form-layout">
-            <div class="row mg-b-25">
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="firstname" value="John Paul" placeholder="Enter firstname">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="lastname" value="McDoe" placeholder="Enter lastname">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="email" value="johnpaul@yourdomain.com" placeholder="Enter email address">
-                </div>
-              </div><!-- col-4 -->
-              <div class="col-lg-8">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Mail Address: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="address" value="Market St. San Francisco" placeholder="Enter address">
-                </div>
-              </div><!-- col-8 -->
-              <div class="col-lg-4">
-                <div class="form-group mg-b-10-force">
-                  <label class="form-control-label">Country: <span class="tx-danger">*</span></label>
-                  <select class="form-control select2" data-placeholder="Choose country">
-                    <option label="Choose country"></option>
-                    <option value="USA">United States of America</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="China">China</option>
-                    <option value="Japan">Japan</option>
-                  </select>
-                </div>
-              </div><!-- col-4 -->
-            </div><!-- row -->
-
-            <div class="form-layout-footer">
-              <button class="btn btn-info mg-r-5">Submit Form</button>
-              <button class="btn btn-secondary">Cancel</button>
-            </div><!-- form-layout-footer -->
-          </div><!-- form-layout -->
-        </div><!-- card -->
-
-        <div class="row row-sm mg-t-20">
-          <div class="col-xl-6">
-            <div class="card pd-20 pd-sm-40 form-layout form-layout-4">
-              <h6 class="card-body-title">Left Label Alignment</h6>
-              <p class="mg-b-20 mg-sm-b-30">A basic form where labels are aligned in left.</p>
-              <div class="row">
-                <label class="col-sm-4 form-control-label">Firstname: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter firstname">
-                </div>
-              </div><!-- row -->
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Lastname: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter lastname">
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Email: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter email address">
-                </div>
-              </div>
-              <div class="row mg-t-20">
-                <label class="col-sm-4 form-control-label">Address: <span class="tx-danger">*</span></label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <textarea rows="2" class="form-control" placeholder="Enter your address"></textarea>
-                </div>
-              </div>
-              <div class="form-layout-footer mg-t-30">
-                <button class="btn btn-info mg-r-5">Submit Form</button>
-                <button class="btn btn-secondary">Cancel</button>
-              </div><!-- form-layout-footer -->
-            </div><!-- card -->
-          </div><!-- col-6 -->
-          <div class="col-xl-6 mg-t-25 mg-xl-t-0">
-            <div class="card pd-20 pd-sm-40 form-layout form-layout-5">
-              <h6 class="tx-gray-800 tx-uppercase tx-bold tx-14 mg-b-10">Right Label Alignment</h6>
-              <p class="mg-b-30 tx-gray-600">A basic form where labels are aligned in right.</p>
-              <div class="row row-xs">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Firstname:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter firstname">
-                </div>
-              </div><!-- row -->
-              <div class="row row-xs mg-t-20">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Lastname:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter lastname">
-                </div>
-              </div>
-              <div class="row row-xs mg-t-20">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Email:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <input type="text" class="form-control" placeholder="Enter email address">
-                </div>
-              </div>
-              <div class="row row-xs mg-t-20">
-                <label class="col-sm-4 form-control-label"><span class="tx-danger">*</span> Address:</label>
-                <div class="col-sm-8 mg-t-10 mg-sm-t-0">
-                  <textarea rows="2" class="form-control" placeholder="Enter your address"></textarea>
-                </div>
-              </div><!-- row -->
-              <div class="row row-xs mg-t-30">
-                <div class="col-sm-8 mg-l-auto">
-                  <div class="form-layout-footer">
-                    <button class="btn btn-info mg-r-5">Submit Form</button>
-                    <button class="btn btn-secondary">Cancel</button>
-                  </div><!-- form-layout-footer -->
-                </div><!-- col-8 -->
-              </div>
-            </div><!-- card -->
-          </div><!-- col-6 -->
-        </div><!-- row -->
-
-        <div class="card pd-20 pd-sm-40 mg-t-20">
-          <h6 class="card-body-title">Form Alignment</h6>
-          <p class="mg-b-20 mg-sm-b-30">An inline form that is centered align and right aligned.</p>
-
-          <div class="d-flex align-items-center justify-content-center bg-gray-100 ht-md-80 bd pd-x-20">
-            <div class="d-md-flex pd-y-20 pd-md-y-0">
-              <input type="text" class="form-control" placeholder="Email address">
-              <input type="password" class="form-control mg-md-l-10 mg-t-10 mg-md-t-0" placeholder="Password">
-              <button class="btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0">Sign In</button>
-            </div>
-          </div><!-- d-flex -->
-
-          <div class="d-flex align-items-center justify-content-end bg-gray-100 ht-md-80 bd pd-x-20 mg-t-10">
-            <div class="d-md-flex pd-y-20 pd-md-y-0">
-              <input type="text" class="form-control" placeholder="Email address">
-              <input type="password" class="form-control mg-md-l-10 mg-t-10 mg-md-t-0" placeholder="Password">
-              <button class="btn btn-info pd-y-13 pd-x-20 bd-0 mg-md-l-10 mg-t-10 mg-md-t-0">Sign In</button>
-            </div>
-          </div><!-- d-flex -->
-        </div><!-- card -->
-
-@endsection
+	<div class="sl-page-title">
+		<div class="card pd-20 pd-sm-40">
+			<h6 class="card-body-title"> Add Product</h6>
+			<div class="form-layout">
+				<form action="{{ route('product.post') }}" method="POST" enctype="multipart/form-data">
+					@csrf
+					<div class="row mg-b-25">
+						
+						<div class="col-lg-4">
+							<div class="form-group">
+								<label class="form-control-label">Brand Name: <span class="tx-danger">*</span></label>
+								
+								<select class="form-control select2" placeholder="Brand Name" name="brand_id">
+									<option label="Choose Category"></option>
+									@foreach ($brands as $brand)
+									<option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+									@endforeach
+								</select>
+							</div>
+							</div><!-- col-4 -->
+							<div class="col-lg-4">
+								<div class="form-group">
+									<label class="form-control-label">category Name: <span class="tx-danger">*</span></label>
+									<select class="form-control select2" placeholder="Category Name" name="category_id">
+										<option label="Choose Category"></option>
+										@foreach ($categories as $category)
+										<option value="{{ $category->id }}">{{ $category->category_name }}</option>
+										@endforeach
+									</select>
+									
+								</div>
+								</div><!-- col-4 -->
+								<div class="col-lg-4">
+									<div class="form-group">
+										<label class="form-control-label">Sub Category Name: <span class="tx-danger">*</span></label>
+										<select class="form-control select2" placeholder="Category Name" name="subcategory_id">
+											<option label="Choose country"></option>
+											<option value="USA">United States of America</option>
+											
+										</select>
+										
+									</div>
+									</div><!-- col-4 -->
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="form-control-label">Sub Sub Category Name: <span class="tx-danger">*</span></label>
+											<select class="form-control select2" placeholder="Sub Sub Category Name" name="subsubcategory_id">
+												<option label="Choose country"></option>
+												<option value="USA">United States of America</option>
+												
+											</select>
+											
+										</div>
+										</div><!-- col-4 -->
+										<div class="col-lg-4">
+											<div class="form-group">
+												<label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
+												<input class="form-control" type="text" name="product_name" placeholder="Product Name">
+											</div>
+											</div><!-- col-4 -->
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label class="form-control-label">Product Price: <span class="tx-danger">*</span></label>
+													<input class="form-control" type="text" name="price" placeholder="Product Price">
+												</div>
+												</div><!-- col-4 -->
+												<div class="col-lg-4">
+													<div class="form-group">
+														<label class="form-control-label">Discount Price: <span class="tx-danger">*</span></label>
+														<input class="form-control" type="text" name="discount_price" placeholder="Discount Price">
+													</div>
+													</div><!-- col-4 -->
+													<div class="col-lg-4">
+														<div class="form-group">
+															<label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
+															<input class="form-control" type="text" name="product_code" placeholder="Product Code">
+														</div>
+														</div><!-- col-4 -->
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label class="form-control-label">Product QTY: <span class="tx-danger">*</span></label>
+																<input class="form-control" type="text" name="product_qty" placeholder="Product Qty">
+															</div>
+															</div><!-- col-4 -->
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label class="form-control-label">Product Tag: <span class="tx-danger">*</span></label>
+																	<input class="form-control" type="text" name="product_tag" placeholder="Product Tag">
+																</div>
+																</div><!-- col-4 -->
+																<div class="col-lg-4">
+																	<div class="form-group">
+																		<label class="form-control-label">Product Size: <span class="tx-danger">*</span></label>
+																		<input class="form-control" type="text" name="product_size" placeholder="Product Size">
+																	</div>
+																	</div><!-- col-4 -->
+																	<div class="col-lg-6">
+																		<div class="form-group mg-b-10-force">
+																			<label class="form-control-label">Thumbnail Image: <span class="tx-danger">*</span></label>
+																			<input class=" dropify form-control" type="file" name="thumbnail_image"  placeholder="Thumbnail Image">
+																		</div>
+																		</div><!-- col-8 -->
+																		<div class="col-lg-6">
+																			<div class="form-group mg-b-10-force">
+																				<label class=" form-control-label">Multiple Image: <span class="tx-danger">*</span></label>
+																				<input class="dropify form-control" type="file" name="multiple_image"  placeholder='Multiple Image' multiple>
+																			</div>
+																			</div><!-- col-8 -->
+																			<div class="col-md-6">
+																				<div class="form-group">
+																					<label class="form-control-label">Short Description: <span class="tx-danger">*</span></label>
+																					<textarea name="shot_des" id="summernote"></textarea>
+																					@error('shot_des')
+																					<span class="text-danger">{{ $message }}</span>
+																					@enderror
+																				</div>
+																			</div>
+																			<div class="col-md-6">
+																				<div class="form-group">
+																					<label class="form-control-label">Long Description: <span class="tx-danger">*</span></label>
+																					<textarea name="long_des" id="summernote2"></textarea>
+																					@error('long_des')
+																					<span class="text-danger">{{ $message }}</span>
+																					@enderror
+																				</div>
+																			</div>
+																			<div class="col-md-4">
+																				<label class="ckbox">
+																					<input type="checkbox" name="hot_deals" value="1"><span>Hot Deals</span>
+																				</label>
+																			</div>
+																			<div class="col-md-4">
+																				<label class="ckbox">
+																					<input type="checkbox" name="featured" value="1"><span>Featured</span>
+																				</label>
+																			</div>
+																			<div class="col-md-4">
+																				<label class="ckbox">
+																					<input type="checkbox" name="special_offer" value="1"><span>special_offer</span>
+																				</label>
+																			</div>
+																			<div class="col-md-4">
+																				<label class="ckbox">
+																					<input type="checkbox" name="special_deals" value="1"><span>special_deals</span>
+																				</label>
+																			</div>
+																			
+																			</div><!-- row -->
+																			<div class="form-layout-footer">
+																				<button style="cursor: pointer;" class="btn btn-info mg-r-5">Add Product</button>
+																				<button class="btn btn-secondary">Cancel</button>
+																			</form>
+																			</div><!-- form-layout-footer -->
+																			</div><!-- form-layout -->
+																			</div><!-- card -->
+																		</div>
+																		</div><!-- d-flex -->
+																		<script src="{{asset('backend')}}/lib/jquery-2.2.4.min.js"></script>
+																		<script type="text/javascript">
+																		$(document).ready(function() {
+																		$('select[name="category_id"]').on('change', function(){
+																		var category_id = $(this).val();
+																		if(category_id) {
+																		$.ajax({
+																		url: "{{  url('/admin/subcategory/ajax') }}/"+category_id,
+																		type:"GET",
+																		dataType:"json",
+																		success:function(data) {
+																		var d =$('select[name="subcategory_id"]').empty();
+																		$.each(data, function(key, value){
+																		$('select[name="subcategory_id"]').append('<option value="'+ value.id +'">' + value.subcategory_name + '</option>');
+																		});
+																		},
+																		});
+																		} else {
+																		alert('danger');
+																		}
+																		});
+																		});
+																		$(document).ready(function() {
+																		$('select[name="subcategory_id"]').on('change', function(){
+																		var subcategory_id = $(this).val();
+																		if(subcategory_id) {
+																		$.ajax({
+																		url: "{{  url('/admin/subsubcategory/ajax') }}/"+subcategory_id,
+																		type:"GET",
+																		dataType:"json",
+																		success:function(data) {
+																		var d =$('select[name="subsubcategory_id"]').empty();
+																		$.each(data, function(key, value){
+																		$('select[name="subsubcategory_id"]').append('<option value="'+ value.id +'">' + value.subsubcategory_name + '</option>');
+																		});
+																		},
+																		});
+																		} else {
+																		alert('danger');
+																		}
+																		});
+																		});
+																		</script>
+																		@endsection

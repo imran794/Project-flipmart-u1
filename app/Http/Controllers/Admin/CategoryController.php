@@ -283,6 +283,11 @@ class CategoryController extends Controller
         $subcat = SubCategory::where('category_id',$category_id)->orderBy('subcategory_name','asc')->get();
         return json_encode($subcat);
     }
+      public function subsubcategoryajax($subcategory_id)
+    {
+        $subcat = Subsubcategory::where('subcategory_id',$subcategory_id)->orderBy('subsubcategory_name','asc')->get();
+        return json_encode($subcat);
+    }
 
     public function subsubcategorysoft($id)
     {

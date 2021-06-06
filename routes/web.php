@@ -81,6 +81,7 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
    Route::get('add/subsubcategory',[CategoryController::class,'subindex'])->name('add.subsubcategory');
    Route::post('subsubcategory/post',[CategoryController::class,'subsubcategorypost'])->name('subsubcategory.post');
    Route::get('subcategory/ajax/{category_id}',[CategoryController::class,'subcategoryajax']);
+   Route::get('subsubcategory/ajax/{subcategory_id}',[CategoryController::class,'subsubcategoryajax']);
    Route::get('subsubcategory/soft/{id}',[CategoryController::class,'subsubcategorysoft']);
    Route::get('subsubcategory/restore/{id}',[CategoryController::class,'subsubcategoryrestore']);
    Route::get('subsubcategory/delete/{id}',[CategoryController::class,'subsubcategorydelete']);
@@ -88,6 +89,8 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
    // product
 
    Route::get('add/product',[ProductController::class,'index'])->name('add.product');
+   Route::post('product/post',[ProductController::class,'productpost'])->name('product.post');
+
 
 
 
