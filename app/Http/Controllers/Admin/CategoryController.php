@@ -47,7 +47,10 @@ class CategoryController extends Controller
 
     public function categorysoft($id)
     {
-    	Category::findOrFail($id)->delete();
+
+    	  Category::findOrFail($id)->delete();
+          // Subcategory::where('subcategory_id',$id)->delete();
+          // Subsubcategory::where('subsubcategory_id',$id)->delete();
     	  	  $notification=array(
             'message'=>'Category soft Delete Successfully',
             'alert-type'=>'success'

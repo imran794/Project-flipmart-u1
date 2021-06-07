@@ -37,6 +37,7 @@
       <link href="{{ asset('dashboard_assets') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="{{ asset('dashboard_assets') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
      <link href="{{ asset('dashboard_assets') }}/lib/select2/css/select2.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="{{asset('backend')}}/lib/bootstrap-tagsinput.css" crossorigin="anonymous">
       <link rel="stylesheet" href="{{ asset('backend') }}/lib/toastr/toastr.css">
       <link rel="stylesheet" href="{{ asset('backend') }}/css/dropify.min.css">
       <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
@@ -98,7 +99,7 @@
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('add.product') }}" class="nav-link @yield('Add Product')">Add Product</a></li>
-          <li class="nav-item"><a href="{{ route('add.subcategory') }}" class="nav-link @yield('Add Sub Category')">Add Sub Category</a></li>
+          <li class="nav-item"><a href="{{ route('manage.product') }}" class="nav-link @yield('Manage Products')">Manage Products</a></li>
           <li class="nav-item"><a href="{{ route('add.subsubcategory') }}" class="nav-link @yield('Add Sub Sub Category')">Add Sub Sub Category</a></li>
         </ul>
         <a href="widgets.html" class="sl-menu-link">
@@ -345,6 +346,7 @@
     <script src="{{ asset('dashboard_assets') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/datatables/jquery.dataTables.js"></script>
+     <script src="{{asset('backend')}}/lib/bootstrap-tagsinput.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="{{ asset('dashboard_assets') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
      <script src="{{ asset('dashboard_assets') }}/lib/select2/js/select2.min.js"></script>
@@ -379,6 +381,12 @@
       $(document).ready(function() {
           $('.js-example-basic-single').select2();
       });
+
+       // Select2 with tagging support
+        $('.select2-tag').select2({
+          tags: true,
+          tokenSeparators: [',', ' ']
+        });
 
      
 

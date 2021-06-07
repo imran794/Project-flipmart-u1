@@ -33,6 +33,7 @@ class CreateProductsTable extends Migration
             $table->integer('hot_deals')->nullable();
             $table->integer('special_offer')->nullable();
             $table->integer('special_deals')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

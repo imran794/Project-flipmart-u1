@@ -90,6 +90,8 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
 
    Route::get('add/product',[ProductController::class,'index'])->name('add.product');
    Route::post('product/post',[ProductController::class,'productpost'])->name('product.post');
+   Route::get('manage/product',[ProductController::class,'productshow'])->name('manage.product');
+   Route::get('product/view/{id}',[ProductController::class,'productview'])->name('product.view');
 
 
 
