@@ -106,7 +106,7 @@ active
                          </td>
                          <td>
                            <div class="btn-group" role="group" aria-label="Basic example">
-                             <a href="{{ url('admin/restore') }}/{{ $trash->id }}" class="btn btn-info btn-sm" title="restore">restore</a>
+                             <a href="{{ url('admin/restore') }}/{{ $trash->id }}" class="btn btn-info btn-sm" title="restore"><i class="fa fa-arrow-up"></i></a>
                              <a href="{{ url('admin/delete') }}/{{ $trash->id }}" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
                            </div>
                          </td>

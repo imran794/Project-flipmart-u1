@@ -75,6 +75,7 @@ class BrandController extends Controller
 
     public function brandsoft($id)
     {
+     
         Brand::findOrFail($id)->delete();
         $notification=array(
             'message'=>'Brand Soft Successfully',
@@ -96,7 +97,13 @@ class BrandController extends Controller
 
     public function delete($id)
     {
+        $brand = Brand::findOrFail($id);
+         // $image = $brand->brand_image;
+         // unlink($image);
         Brand::withTrashed()->where('id','=',$id)->forcedelete();
+
+       
+        
            $notification=array(
             'message'=>'Data Delete Successfully',
             'alert-type'=>'success'
@@ -116,7 +123,7 @@ class BrandController extends Controller
         $brand_id  = $request->id;
         $old_image = $request->old_image;
 
-        if ($request->file('brand_image')) {
+        if ($request->has('brand_image')) {
             unlink($old_image);
             $brand_image       = $request->file('brand_image');
             $new_name          = hexdec(uniqid()).'.'.$brand_image->extension();

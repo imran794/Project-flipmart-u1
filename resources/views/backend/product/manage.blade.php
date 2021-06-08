@@ -46,7 +46,7 @@ active
                                     @foreach ($products as $product)
                                     <tr>
                                         <td>
-                                            <img width="100" src="{{ asset($product->thumbnail_image) }}" alt="">
+                                            <img width="60" src="{{ asset($product->thumbnail_image) }}" alt="">
                                         </td>
                                         <td>{{ $product->brand->brand_name }}</td>
                                         <td>{{ $product->category->category_name }}</td>
@@ -63,15 +63,15 @@ active
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a href="{{ url('admin/edit') }}/{{ $product->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ url('admin/product/edit') }}/{{ $product->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
 
                                                 <a href="{{ url('admin/product/view') }}/{{ $product->id }}" type="button" class="btn btn-info btn-sm" title="View"><i class="fa fa-eye"></i></a>
 
-                                                <a href="{{ url('admin/brand/soft') }}/{{ $product->id }}" type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ url('admin/product/soft') }}/{{ $product->id }}" type="button" class="btn btn-danger btn-sm" title="Soft Delete"><i class="fa fa-trash"></i></a>
                                                 @if ($product->status == 1)
-                                                <a href="{{ url('admin/inactive') }}/{{ $product->id }}" type="button" class="btn btn-danger btn-sm" title="Inactive"><i class="fa fa-arrow-down"></i></a>
+                                                <a href="{{ url('admin/product/inactive') }}/{{ $product->id }}" type="button" class="btn btn-danger btn-sm" title="Inactive"><i class="fa fa-arrow-down"></i></a>
                                                 @else
-                                                <a href="{{ url('admin/active') }}/{{ $product->id }}" type="button" class="btn btn-info btn-sm" title="Active"><i class="fa fa-arrow-up"></i></a>
+                                                <a href="{{ url('admin/product/active') }}/{{ $product->id }}" type="button" class="btn btn-info btn-sm" title="Active"><i class="fa fa-arrow-up"></i></a>
                                                 @endif
                                             </div>
                                         </td>
@@ -95,35 +95,46 @@ active
                             <table id="datatable2" class="table display responsive nowrap">
                                 <thead>
                                     <tr>
-                                        <th class="wd-25p">Brand Image</th>
-                                        <th class="wd-25p">Brand Name</th>
-                                        <th class="wd-25p">status</th>
-                                        <th class="wd-25p">Action</th>
+                                              <th class="wd-10p">Image</th>
+                                        <th class="wd-10p">Brand</th>
+                                        <th class="wd-10p">Category</th>
+                                        <th class="wd-10p">Subcategory</th>
+                                        <th class="wd-10p">Subsubcategory</th>
+                                        <th class="wd-10p">Product</th>
+                                        <th class="wd-10p">Price</th>
+                                        <th class="wd-10p">Status</th>
+                                        <th class="wd-10p">Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
+                                <tbody>
                        @foreach ($trashed as $trash)
                        <tr>
-                         <td>
-                           <img width="100" src="{{ asset($trash->brand_image) }}" alt="$trash->brand_image">
-                                </td>
-                                <td>{{ $trash->brand_name }}</td>
-                                <td>
-                                    @if ($trash->status == 1)
-                                    <span class="badge badge-pill badge-success">Active</span>
-                                    @else
-                                    <span class="badge badge-pill badge-danger">Deactive</span>
-                                    @endif
-                                </td>
+                          <tr>
+                                        <td>
+                                            <img width="60" src="{{ asset($trash->thumbnail_image) }}" alt="">
+                                        </td>
+                                        <td>{{ $trash->brand->brand_name }}</td>
+                                        <td>{{ $trash->category->category_name }}</td>
+                                        <td>{{ $trash->subcategory->subcategory_name }}</td>
+                                        <td>{{ $trash->subsubcategory->subsubcategory_name }}</td>
+                                        <td>{{ $trash->product_name }}</td>
+                                        <td>{{ $trash->price }}</td>
+                                        <td>
+                                            @if ($trash->status == 1)
+                                            <span class="badge badge-pill badge-success">Active</span>
+                                            @else
+                                            <span class="badge badge-pill badge-danger">Deactive</span>
+                                            @endif
+                                        </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ url('admin/restore') }}/{{ $trash->id }}" class="btn btn-info btn-sm" title="restore">restore</a>
-                                        <a href="{{ url('admin/delete') }}/{{ $trash->id }}" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ url('admin/product/restore') }}/{{ $trash->id }}" class="btn btn-info btn-sm" title="restore"><i class="fa fa-arrow-up"></i></a>
+                                        <a href="{{ url('admin/product/delete') }}/{{ $trash->id }}" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                                 </tr>
                                 @endforeach
-                                </tbody> --}}
+                                </tbody>
 
                             </table>
                         </div>

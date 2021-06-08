@@ -6,6 +6,7 @@ active show-sub
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('manage.product') }}">Manage Product</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add Product</li>
     </ol>
 </nav>
@@ -14,11 +15,11 @@ active show-sub
 <div class="sl-pagebody">
     <div class="sl-page-title">
         <div class="card pd-20 pd-sm-40">
-            <h3 class="card-body-title"> view Product</h3>
+            <h3 class="card-body-title"> Edit Product</h3>
             <div class="form-layout">
-              
+               <form action="{{ route('product.post.edit') }}" method="POST">
                     <input type="hidden" name="id" value="{{ $edit_data->id }}" >
-                  
+                  @csrf
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -126,7 +127,7 @@ active show-sub
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label">Product Tag: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" disabled name="product_tag"  value="{{ $edit_data->product_tag }}" data-role="tagsinput">
+                                <input class="form-control" type="text" name="product_tag"  value="{{ $edit_data->product_tag }}" data-role="tagsinput">
                                 @error('product_tag')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -135,7 +136,7 @@ active show-sub
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="form-control-label">Product Size: <span class="tx-danger">*</span></label>
-                                <input class="form-control" type="text" disabled name="product_size" value="{{ $edit_data->product_size }}" data-role="tagsinput">
+                                <input class="form-control" type="text" name="product_size" value="{{ $edit_data->product_size }}" data-role="tagsinput">
                                 @error('product_size')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -183,8 +184,9 @@ active show-sub
 
                     </div><!-- row -->
                     <div class="form-layout-footer">
-                        <button style="cursor: pointer;" class="btn btn-info mg-r-5">Add Product</button>
+                        <button style="cursor: pointer;" class="btn btn-info mg-r-5">Edit Product</button>
                         <button class="btn btn-secondary">Cancel</button>
+                    </div>
                 </form>
             </div><!-- form-layout-footer -->
         </div><!-- form-layout -->
@@ -192,20 +194,29 @@ active show-sub
 </div>
 </div><!-- d-flex -->
 
-<input type="hidden" name="image_id" value="{{ $edit_data->thumpnil_image }}">
+  <form action="{{ route('thumpnil.image.update') }}" method="POST" enctype="multipart/form-data">
+     @csrf
+      <input type="text" name="product_id" value="{{ $edit_data->id }}">
+      <input type="text" name="old_image" value="{{ $edit_data->thumbnail_image }}">
     <div class="row row-sm" style="margin-top: 50px;">
-      <div class="col-md-3"><h5 class="text-center">Thumpnil Image</h5>
+      <div class="col-md-3">
         <div class="card">
           <img width="100" class="card-img-top"  src="{{ asset($edit_data->thumbnail_image) }}" alt="thumpnil_image">
           <div class="card-body">
             <p class="card-text">
               <div class="form-group">
+                <label for="exampleInputPassword1">Update Image</label>
+                <input type="file" class="form-control" name="thumpnil_image" id="exampleInputPassword1">
               </div>
             </p>
           </div>
         </div>
       </div>
       </div>
+      <div class="form-layout-footer pt-3">
+        <button type="submit" style="cursor: pointer" class="btn btn-info mg-r-5">Update Image</button>
+      </div>
+    </form>
 
 
     

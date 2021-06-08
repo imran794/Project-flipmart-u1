@@ -49,8 +49,8 @@ class CategoryController extends Controller
     {
 
     	  Category::findOrFail($id)->delete();
-          // Subcategory::where('subcategory_id',$id)->delete();
-          // Subsubcategory::where('subsubcategory_id',$id)->delete();
+          Subcategory::where('category_id',$id)->delete();
+          Subsubcategory::where('subcategory_id',$id)->delete();
     	  	  $notification=array(
             'message'=>'Category soft Delete Successfully',
             'alert-type'=>'success'
@@ -70,15 +70,15 @@ class CategoryController extends Controller
 
     }
 
-    public function categorydelete($id)
-    {
-    	Category::withTrashed()->where('id','=',$id)->forceDelete();
-    	  $notification=array(
-            'message'=>'Category Hard Delete Successfully',
-            'alert-type'=>'success'
-        );
-        return Redirect()->route('add.category')->with($notification);
-    }
+    // public function categorydelete($id)
+    // {
+    // 	Category::withTrashed()->where('id','=',$id)->forceDelete();
+    // 	  $notification=array(
+    //         'message'=>'Category Hard Delete Successfully',
+    //         'alert-type'=>'success'
+    //     );
+    //     return Redirect()->route('add.category')->with($notification);
+    // }
 
     public function categoryinactive($id)
     {
@@ -164,6 +164,7 @@ class CategoryController extends Controller
     public function subcategorysoft($id)
     {
         SubCategory::findOrFail($id)->delete();
+        Subsubcategory::where('subcategory_id',$id)->delete();
             $notification=array(
             'message'=>'SubCategory Soft Delete Successfully',
             'alert-type'=>'success'
@@ -184,6 +185,7 @@ class CategoryController extends Controller
     public function subcategorydelete($id)
     {
         SubCategory::withTrashed()->where('id','=',$id)->forceDelete();
+        Subsubcategory::where('subcategory_id',$id)->where('id','=',$id)->forceDelete();
           $notification=array(
             'message'=>'SubCategory Delete Successfully',
             'alert-type'=>'success'

@@ -95,7 +95,8 @@ class ProductController extends Controller
     public function productshow()
     {
     	return view('backend.product.manage',[
-    		'products'		=> Product::latest()->get()
+    		'products'		=> Product::latest()->get(),
+            'trashed'       => Product::onlyTrashed()->get()
     	]);
     }
 
@@ -105,10 +106,140 @@ class ProductController extends Controller
     		'edit_data'			=> Product::findOrFail($id),
     		'brands'	    	=> Brand::latest()->get(),
     	    'categories'		=> Category::latest()->get(),
+    	    'multiple_images'	=> Multipleimage::where('product_id',$id)->latest()->get()
    
     		
     	]);
     }
+
+    public function productsoft($id)
+    {
+        Product::findOrFail($id)->delete();
+         $notification=array(
+            'message'=>'Products Soft Delete Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('manage.product')->with($notification);
+    }
+
+    public function productrestore($id)
+    {
+        Product::withTrashed()->where('id','=',$id)->restore();
+        $notification=array(
+            'message'=>'Products Restore Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('manage.product')->with($notification);
+    }
+
+    public function productdelete($id)
+    {
+        // $brand = Product::findOrFail($id);
+         // $image = $brand->brand_image;
+         // unlink($image);
+        Product::withTrashed()->where('id','=',$id)->forcedelete();
+
+                  $notification=array(
+            'message'=>'Products Delete Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+    public function productinactive($id)
+    {
+        Product::findOrFail($id)->update(['status' => 0]);
+          $notification=array(
+            'message'=>'Product Inactive Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('manage.product')->with($notification);
+    } 
+
+      public function productactive($id)
+    {
+        Product::findOrFail($id)->update(['status' => 1]);
+          $notification=array(
+            'message'=>'Product Active Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('manage.product')->with($notification);
+    }
+
+
+
+    public function productedit($id)
+    {
+        return view('backend.product.edit',[
+            'edit_data'         => Product::findOrFail($id),
+            'brands'            => Brand::latest()->get(),
+            'categories'        => Category::latest()->get(),
+            'multiple_images'   => Multipleimage::where('product_id',$id)->latest()->get()
+        ]);
+    }
+
+    public function productpostedit(Request $request)
+    {
+        $request->validate([
+            'brand_id'               => 'required',
+            'category_id'            => 'required',
+            'subcategory_id'         => 'required',
+            'subsubcategory_id'      => 'required',
+            'product_name'           => 'required',
+            'price'                  => 'required',
+            'product_code'           => 'required',
+            'product_qty'            => 'required',
+            'product_tag'            => 'required',
+            'shot_des'               => 'required',
+            'long_des'               => 'required'
+        ]);
+
+        $product_id = $request->id;
+        
+
+             Product::findOrFail($product_id)->update([
+            'brand_id'               => $request->brand_id,
+            'category_id'            => $request->category_id,
+            'subcategory_id'         => $request->subcategory_id,
+            'subsubcategory_id'      => $request->subsubcategory_id,
+            'product_name'           => $request->product_name,
+            'price'                  => $request->price,
+            'discount_price'         => $request->discount_price,
+            'product_code'           => $request->product_code,
+            'product_qty'            => $request->product_qty,
+            'product_tag'            => $request->product_tag,
+            'product_size'           => $request->product_size,
+            'shot_des'               => $request->shot_des,
+            'long_des'               => $request->long_des,
+            'hot_deals'              => $request->hot_deals,
+            'featured'               => $request->featured,
+            'special_offer'          => $request->special_offer,
+            'special_deals'          => $request->special_deals,
+            'updated_at'             => carbon::now()
+
+        ]);
+
+    }
+
+    public function thumpnilimageupdate(Request $request)
+    {
+        $product_id = $request->product_id;
+         $old_image = $request->old_image;
+
+       
+            unlink($old_image);
+             $image = $request->file('thumbnail_image');
+            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/productimage/'.$name_gen);
+            $save_url = 'upload/productimage/'.$name_gen;
+
+            Product::findOrFail($product_id)->update([
+                'thumbnail_image' => $save_url,
+                'updated_at' => Carbon::now(),
+
+            ]);
+         }
+    
 
 
 
