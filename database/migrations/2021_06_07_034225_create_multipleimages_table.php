@@ -18,7 +18,6 @@ class CreateMultipleimagesTable extends Migration
             $table->integer('product_id');
             $table->string('multi_img');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

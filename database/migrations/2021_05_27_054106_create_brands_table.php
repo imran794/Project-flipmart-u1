@@ -20,7 +20,6 @@ class CreateBrandsTable extends Migration
             $table->string('brand_slug');
             $table->integer('status')->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

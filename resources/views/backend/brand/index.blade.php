@@ -48,7 +48,7 @@ active
                           </td>
                             <td>
                               <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ url('admin/edit') }}/{{ $brand->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-pencil"></i></a>
+                                <a href="{{ url('admin/edit') }}/{{ $brand->id }}" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                 @if (Auth::user()->role_id == 4)
                                  @else
                                    @if (Auth::user()->role_id == 3)
@@ -72,55 +72,6 @@ active
                   </div>
                </div>
            </div>
-           <br>
-           @if (Auth::user()->role_id != 3)
-             
-          
-           <div class="card">
-            <div class="card-body">Trash Data</div>
-            <div class="card-header">
-             <div class="card pd-20 pd-sm-40">
-                 <div class="table-wrapper">
-                   <table id="datatable2" class="table display responsive nowrap">
-                     <thead>
-                       <tr>
-                            <th class="wd-25p">Brand Image</th>
-                            <th class="wd-25p">Brand Name</th>
-                            <th class="wd-25p">status</th>
-                            <th class="wd-25p">Action</th>
-                       </tr>
-                     </thead>
-                     <tbody>
-                       @foreach ($trashed as $trash)
-                       <tr>
-                         <td>
-                           <img width="100" src="{{ asset($trash->brand_image) }}" alt="$trash->brand_image">
-                         </td>
-                         <td>{{ $trash->brand_name }}</td>
-                         <td>
-                           @if ($trash->status == 1)
-                             <span class="badge badge-pill badge-success">Active</span>
-                               @else
-                                 <span class="badge badge-pill badge-danger">Deactive</span>
-                           @endif
-                         </td>
-                         <td>
-                           <div class="btn-group" role="group" aria-label="Basic example">
-                             <a href="{{ url('admin/restore') }}/{{ $trash->id }}" class="btn btn-info btn-sm" title="restore"><i class="fa fa-arrow-up"></i></a>
-                             <a href="{{ url('admin/delete') }}/{{ $trash->id }}" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
-                           </div>
-                         </td>
-                       </tr>
-                       @endforeach
-                     </tbody>
-              
-                   </table>
-                 </div>
-               </div>
-            </div>
-        </div>
-         @else
-           @endif
         </div>
         <div class="col-md-4">
          <div class="card">

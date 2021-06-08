@@ -7,7 +7,7 @@ active show-sub
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
         <li class="breadcrumb-item"><a href="{{ route('manage.product') }}">Manage Product</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Product</li>
     </ol>
 </nav>
 @endsection
@@ -192,21 +192,21 @@ active show-sub
         </div><!-- form-layout -->
     </div><!-- card -->
 </div>
-</div><!-- d-flex -->
+
 
   <form action="{{ route('thumpnil.image.update') }}" method="POST" enctype="multipart/form-data">
      @csrf
-      <input type="text" name="product_id" value="{{ $edit_data->id }}">
-      <input type="text" name="old_image" value="{{ $edit_data->thumbnail_image }}">
+      <input type="hidden" name="old_image" value="{{ $edit_data->thumbnail_image }}">
+      <input type="hidden" name="id" value="{{ $edit_data->id }}">
     <div class="row row-sm" style="margin-top: 50px;">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="card">
-          <img width="100" class="card-img-top"  src="{{ asset($edit_data->thumbnail_image) }}" alt="thumpnil_image">
+          <img width="100" class="card-img-top"  src="{{ asset($edit_data->thumbnail_image) }}" alt="thumbnail_image">
           <div class="card-body">
             <p class="card-text">
               <div class="form-group">
                 <label for="exampleInputPassword1">Update Image</label>
-                <input type="file" class="form-control" name="thumpnil_image" id="exampleInputPassword1">
+                <input type="file" class="dropify form-control" name="thumbnail_image" id="exampleInputPassword1">
               </div>
             </p>
           </div>
@@ -220,27 +220,37 @@ active show-sub
 
 
     
-    <div class="row row-sm" style="margin-top: 50px;">
-      @foreach ($multiple_images as $multiple_image)
-      <div class="col-md-3"><h5 class="text-center">Multiple Image</h5>
-        <div class="card">
-          <img width="100" class="card-img-top"  src="{{ asset($multiple_image->multi_img) }}" alt="Card image cap">
-          <div class="card-body">
-            <p class="card-text">
-              <div class="form-group">
-                <label for="exampleInputPassword1"></label>
-              
-              </div>
-            </p>
-          </div>
-        </div>
-      </div>
-        @endforeach
-        
-      </div>
-    </form>
-    </div>
-  </div>
+       <form action="{{ route('update.product.image') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <br>
+            <br>
+            <h4>Update Product Multiple Image</h4>
+            <div class="row row-sm" style="margin-top:50px;">
+
+              @foreach ($multiple_images as $img)
+                  <div class="col-md-3">
+                    <div class="card" >
+                      <img class="card-img-top" src="{{ asset($img->multi_img) }}" alt="Card image cap" style="height: 150px; width:150px;">
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          <a href="{{ url('admin/product/multi/delete/'.$img->id) }}" class="btn btn-sm btn-danger" id="delete" title="delete data"><i class="fa fa-trash"></i></a>
+                        </h5>
+                        <p class="card-text">
+                          <div class="form-group">
+                            <label class="form-control-label">Change Image<span class="tx-danger">*</span></label>
+                            <input class="dropify form-control" type="file" name="multiimg[{{ $img->id }}]">
+                          </div>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                    @endforeach
+            </div>
+
+            <div class="form-layout-footer pt-3">
+              <button type="submit" style="cursor: pointer"; class="btn btn-info">Update Image</button>
+            </div><!-- form-layout-footer -->
+          </form>
 
 
 

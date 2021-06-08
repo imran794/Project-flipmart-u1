@@ -32,11 +32,10 @@ active
                                 <thead>
                                     <tr>
                                         <th class="wd-10p">Image</th>
-                                        <th class="wd-10p">Brand</th>
                                         <th class="wd-10p">Category</th>
                                         <th class="wd-10p">Subcategory</th>
                                         <th class="wd-10p">Subsubcategory</th>
-                                        <th class="wd-10p">Product</th>
+                                        <th class="wd-10p">Name</th>
                                         <th class="wd-10p">Price</th>
                                         <th class="wd-10p">Status</th>
                                         <th class="wd-10p">Action</th>
@@ -48,7 +47,6 @@ active
                                         <td>
                                             <img width="60" src="{{ asset($product->thumbnail_image) }}" alt="">
                                         </td>
-                                        <td>{{ $product->brand->brand_name }}</td>
                                         <td>{{ $product->category->category_name }}</td>
                                         <td>{{ $product->subcategory->subcategory_name }}</td>
                                         <td>{{ $product->subsubcategory->subsubcategory_name }}</td>
@@ -87,7 +85,7 @@ active
 
 
 
-            <div class="card">
+    {{--         <div class="card">
                 <div class="card-body">Trash Data</div>
                 <div class="card-header">
                     <div class="card pd-20 pd-sm-40">
@@ -140,7 +138,7 @@ active
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
     </div>

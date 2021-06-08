@@ -96,7 +96,7 @@ class ProductController extends Controller
     {
     	return view('backend.product.manage',[
     		'products'		=> Product::latest()->get(),
-            'trashed'       => Product::onlyTrashed()->get()
+        
     	]);
     }
 
@@ -139,7 +139,7 @@ class ProductController extends Controller
          // unlink($image);
         Product::withTrashed()->where('id','=',$id)->forcedelete();
 
-                  $notification=array(
+            $notification=array(
             'message'=>'Products Delete Successfully',
             'alert-type'=>'success'
         );
@@ -222,27 +222,81 @@ class ProductController extends Controller
     }
 
     public function thumpnilimageupdate(Request $request)
-    {
-        $product_id = $request->product_id;
-         $old_image = $request->old_image;
+    {  
+        $old_image = $request->old_image;
+        $id = $request->id;
+        $productImage = Product::where('id',$id)->value('thumbnail_image');
 
-       
-            unlink($old_image);
-             $image = $request->file('thumbnail_image');
-            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(917,1000)->save('upload/productimage/'.$name_gen);
-            $save_url = 'upload/productimage/'.$name_gen;
+        if ($productImage) {
+             unlink($old_image);
+                 $image = $request->file('thumbnail_image');
+                $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                Image::make($image)->resize(917,1000)->save('upload/productimage/'.$name_gen);
+                $save_url = 'upload/productimage/'.$name_gen;
 
-            Product::findOrFail($product_id)->update([
-                'thumbnail_image' => $save_url,
+                Product::findOrFail($id)->update([
+                    'thumbnail_image' => $save_url,
                 'updated_at' => Carbon::now(),
 
             ]);
-         }
-    
+            $notification=array(
+            'message'=>'Product update Successfully',
+            'alert-type'=>'success'
+             );
+           return Redirect()->route('manage.product')->with($notification);
+             }
+
+        
+        else{
+             $image = $request->file('thumbnail_image');
+                $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                Image::make($image)->resize(917,1000)->save('upload/productimage/'.$name_gen);
+                $save_url = 'upload/productimage/'.$name_gen;
+
+                Product::findOrFail($id)->update([
+                    'thumbnail_image' => $save_url,
+                    'updated_at' => Carbon::now(),
+
+            ]);
+                   $notification=array(
+            'message'=>'Product insert Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('manage.product')->with($notification);
+        }
+
+
+}
+
+// update multiple images
+
+public function updateproductimage(Request $request)
+{
+    $images = $request->multiimg;
+
+    foreach ($images as $id => $image) {
+         $imgdel = Multipleimage::findOrFail($id);
+          unlink($imgdel->multi_img);
+       $make_name = hexdec(uniqid()).'.'.$image->extension();
+        Image::make($image)->resize(917,1000)->save('upload/multiimage/'.$make_name);
+        $uplodPath = 'upload/multiimage/'.$make_name;
+         
+
+        Multipleimage::where('id',$id)->update([
+            'multi_img' => $uplodPath,
+            'updated_at' => Carbon::now(),
+        ]);
 
 
 
+         $notification=array(
+            'message'=>'Product Image Update Success',
+            'alert-type'=>'success'
+        );
+        return Redirect()->back()->with($notification);
+
+    }
+}
    
 
 

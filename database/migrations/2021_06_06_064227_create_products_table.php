@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->integer('subsubcategory_id');
             $table->string('product_name');
             $table->string('price');
-            $table->string('discount_price');
+            $table->string('discount_price')->nullable();
             $table->string('product_code');
             $table->string('product_qty');
             $table->string('product_tag');

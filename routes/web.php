@@ -50,7 +50,7 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('restore/{id}',[BrandController::class,'restore']);
     Route::get('delete/{id}',[BrandController::class,'delete']);
     Route::get('edit/{id}',[BrandController::class,'edit']);
-    Route::post('/brand/edit/post',[BrandController::class,'brandeditpost'])->name('brand.edit.post');
+    Route::post('brand/edit/post',[BrandController::class,'brandeditpost'])->name('brand.edit.post');
 
     // category
 
@@ -100,6 +100,7 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
    Route::get('product/active/{id}',[ProductController::class,'productactive']);
    Route::post('product/post/edit',[ProductController::class,'productpostedit'])->name('product.post.edit');
    Route::post('thumpnil/image/update',[ProductController::class,'thumpnilimageupdate'])->name('thumpnil.image.update');
+   Route::post('update/product/image',[ProductController::class,'updateproductimage'])->name('update.product.image');
 
 
 

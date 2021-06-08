@@ -16,7 +16,6 @@ class BrandController extends Controller
 
     	return view('backend.brand.index',[
     	   'brands'		=> Brand::latest()->get(),
-           'trashed'    => Brand::onlyTrashed()->get()
 
     	]);
     }
@@ -120,48 +119,50 @@ class BrandController extends Controller
 
     public function brandeditpost(Request $request)
     {
-        $brand_id  = $request->id;
-        $old_image = $request->old_image;
+           $old_image = $request->old_image;
+           $id = $request->id;
 
-        if ($request->has('brand_image')) {
-            unlink($old_image);
-            $brand_image       = $request->file('brand_image');
-            $new_name          = hexdec(uniqid()).'.'.$brand_image->extension();
-            Image::make($brand_image)->resize(300,300)->save('upload/brandimage/'.$new_name);
-            $save_url          = 'upload/brandimage/'.$new_name;
-
-            Brand::findOrFail($brand_id)->update([
+          
+            if ($request->hasfile('brand_image')) {
+                $brand_image       = $request->file('brand_image');
+                $new_name          = hexdec(uniqid()).'.'.$brand_image->extension();
+                Image::make($brand_image)->resize(300,300)->save('upload/brandimage/'.$new_name);
+                $save_url          = 'upload/brandimage/'.$new_name;
+                unlink($old_image);
+                Brand::findOrFail($id)->update([
                 'brand_name'    => $request->brand_name,
                 'brand_image'   => $save_url,
                 'updated_at'    => carbon::now()
             ]);
+                 $notification=array(
+            'message'=>'Brand Data Updated Successfully',
+            'alert-type'=>'success'
+        );
+        return Redirect()->route('brand')->with($notification);
+                
+            }
+
+            else{
+
+                Brand::findOrFail($id)->update([
+                'brand_name'    => $request->brand_name,
+                'updated_at'    => carbon::now()
+            ]);
+                 $notification=array(
+            'message'=>'Brand Data Updated Successfully',
+            'alert-type'=>'success'
+            );
+            return Redirect()->route('brand')->with($notification);
+
               
-            $notification=array(
-            'message'=>'Brand Data Updated Successfully',
-            'alert-type'=>'success'
-        );
-        return Redirect()->route('brand')->with($notification);
-        }
+            
 
-        else{
-            $brand_image       = $request->file('brand_image');
-            $new_name          = hexdec(uniqid().'.'.$brand_image->extension());
-            Image::make($brand_image)->resize(300,300)->save('upload/brandimage/'.$new_name);
-            $save_url          = 'upload/brandimage/'.$new_name;
 
-            Brand::findOrFail($brand_id)->update([
-                'brand_name'    => $request->brand_name,
-                'brand_image'   => $save_url,
-                'updated_at'    => carbon::now()
-            ]);
-              $notification=array(
-            'message'=>'Brand Data Updated Successfully',
-            'alert-type'=>'success'
-        );
-        return Redirect()->route('brand')->with($notification);
+        
+            }
 
         }
 
 
-    }
+    
 }

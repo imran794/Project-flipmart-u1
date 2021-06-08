@@ -20,8 +20,8 @@
              <div class="card-body">
                    <form method="POST" action="{{ route('brand.edit.post') }}" enctype="multipart/form-data">
                   @csrf
-                  <input type="hidden" name="id" value='{{ $edit_data->id }}'>
                   <input type="hidden" name="old_image" value="{{ $edit_data->brand_image }}">
+                  <input type="text" name="id" value="{{ $edit_data->id }}">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Brand Name</label>
                       <input type="text" class="form-control" name="brand_name" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ $edit_data->brand_name }}">
@@ -32,7 +32,7 @@
                     </div>
                        <div class="form-group">
                       <label for="exampleInputPassword1">Brnad Image</label>
-                      <input type="file" name="brand_image" class="form-control" id="exampleInputPassword1">
+                      <input type="file" name="brand_image" class="dropify form-control" id="exampleInputPassword1">
                       <div class="py-2">
                         <img width="100" src="{{ asset($edit_data->brand_image) }}">
                       </div>
